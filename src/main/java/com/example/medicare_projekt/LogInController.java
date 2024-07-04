@@ -9,11 +9,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class LogInController {
+    LogInModel logInModel;
 
     @FXML
     private TextField benutzerNameTextField;
@@ -24,9 +27,16 @@ public class LogInController {
     @FXML
     private Button signInButton;
 
+    @FXML
+    private ImageView imageView;
+
     private Stage stage;
 
     private Scene scene;
+
+    private String passwort = "1234";
+
+    private String benutzername = "demo";
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -36,16 +46,16 @@ public class LogInController {
         this.scene = scene;
     }
 
-    public void handleSigninButton(ActionEvent event) throws IOException {
-        String passwort = passwortTextField.getText();
-        String benutzername = benutzerNameTextField.getText();
 
-        if (benutzername.equals("demo") && passwort.equals("1234")) {
+    public void handleSigninButton(ActionEvent event) throws IOException {
+        String passwortEingegeben = passwortTextField.getText();
+        String benutzernameEingegeben = benutzerNameTextField.getText();
+
+        if (benutzernameEingegeben.equals(benutzername) && passwortEingegeben.equals(passwort)) {
             Stage loginStage =
                     (Stage) ((Node) event.getSource()).getScene().getWindow();
             loginStage.close();
 
-            // Load and show the main window
             FXMLLoader loader = new FXMLLoader(getClass().getResource("HauptFenster.fxml"));
             Parent hauptFenster = loader.load();
             Scene scene = new Scene(hauptFenster);
@@ -65,4 +75,4 @@ public class LogInController {
             alert.showAndWait();
         }
     }
-    }
+}

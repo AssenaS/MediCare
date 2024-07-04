@@ -39,6 +39,7 @@ public class MedicationListController {
 
     private Scene previousScene = SceneManager.getInstance().getPreviousScene();
     private Stage stage = null;
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -54,6 +55,10 @@ public class MedicationListController {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Medikament hinzufügen");
+        stage.show();
+
+        AddMedicationController controller = loader.getController();
+        controller.setMedicationListController(this);
         stage.show();
 
     }
@@ -76,8 +81,17 @@ public class MedicationListController {
         tabelleNebenwirkungen.setCellValueFactory(new PropertyValueFactory<>("nebenwirkungen"));
     }
 
+    public void refreshMedicationList() {
+        medicationArrayList = medicationModel.getMedication();
+        updateTableView();
+    }
 
+    public void handleMedicationDelete(ActionEvent actionEvent) {
+        Medication selectedMedication = (Medication) tabelleMedikamente.getSelectionModel().getSelectedItem();
+        medicationArrayList.remove(selectedMedication);
+        MedicationModel.getMedication().remove(selectedMedication);
+        MedicationModel.medicationSerialize();
+        updateTableView();
 
-
-
+    }
 }

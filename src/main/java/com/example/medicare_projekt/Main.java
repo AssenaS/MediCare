@@ -12,8 +12,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInView.fxml"));
         AnchorPane root = loader.load();
+
 
         LogInController controller = loader.getController();
         controller.setStage(primaryStage);

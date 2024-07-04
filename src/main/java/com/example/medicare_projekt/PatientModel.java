@@ -18,21 +18,8 @@ public class PatientModel {
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(patientList);
             System.out.println("Serialized Patient in List!");
-            //clearPatientFile();
         } catch (IOException i) {
             i.printStackTrace();
-        }
-    }
-
-    public void patientDeserealize() {
-        try (FileInputStream fileIn = new FileInputStream(patientFile);
-             ObjectInputStream in = new ObjectInputStream(fileIn)) {
-            patientList = (ArrayList<Patient>) in.readObject();
-        } catch (IOException i) {
-            i.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            System.out.println("Patient class not found");
-            c.printStackTrace();
         }
     }
 
@@ -53,15 +40,6 @@ public class PatientModel {
             }
         } else {
             System.out.println("Datei nicht gefunden: " + patientFile);
-        }
-    }
-
-    public static void clearPatientFile() {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(patientFile))) {
-            out.writeObject(new ArrayList<Patient>());
-            System.out.println("Patient file cleared.");
-        } catch (IOException e) {
-            System.err.println("Error clearing patient file: " + e.getMessage());
         }
     }
 

@@ -16,34 +16,22 @@ public class MedicationModel {
         medicationList = new ArrayList<>();
         loadDataFromFile();
     }
-    public void medicationSerialize() {
+    public static void medicationSerialize() {
         try (FileOutputStream fileOut = new FileOutputStream(medicationFile);
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(medicationList);
             System.out.println("Serialized Medication in List!");
-            medicationList.clear();
-            //clearMedicationFile();
         } catch (IOException i) {
             i.printStackTrace();
         }
     }
 
-    public void medicationDeserealize() {
-        try (FileInputStream fileIn = new FileInputStream(medicationFile);
-             ObjectInputStream in = new ObjectInputStream(fileIn)) {
-            medicationList = (ArrayList<Medication>) in.readObject();
-        } catch (IOException i) {
-            i.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            System.out.println("Medication class not found");
-            c.printStackTrace();
-        }
-    }
-
-    public static void addMedication(String medicationName, int index, ArrayList<String> nebenwirkungen){
-        medicationList.add(new Medication(medicationName, index, nebenwirkungen));
+    public static void addMedication(Medication medication ){
+        medicationList.add(medication);
 
         System.out.println(medicationList);
+        medicationSerialize();
+
     }
 
     public void loadDataFromFile() {
@@ -53,16 +41,5 @@ public class MedicationModel {
             medicationList = new ArrayList<>();
         }
     }
-
-    public static void clearMedicationFile() {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(medicationFile))) {
-            out.writeObject(new ArrayList<Patient>());
-            System.out.println("Medication file cleared.");
-        } catch (IOException e) {
-            System.err.println("Error clearing patient file: " + e.getMessage());
-        }
-    }
-
-
 
 }

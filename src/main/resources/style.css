@@ -35,3 +35,21 @@
 .table-view .table-row-cell:odd {
     -fx-background-color: whitesmoke;
 }
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: lightblue; /* Change the background color of selected cells */
+    -fx-text-fill: black;             /* Ensure text is visible (optional) */
+}
+
+.table-view .table-row-cell:odd:selected {
+    -fx-background-color: lightblue; /* Change the background color of odd selected cells */
+    -fx-text-fill: black;             /* Ensure text is visible (optional) */
+}
+
+.table-row-cell:even {
+    -fx-background-color: white;    /* Set background color for even rows */
+}
+
+.table-row-cell:odd {
+    -fx-background-color: lightgray; /* Set background color for odd rows */
+}

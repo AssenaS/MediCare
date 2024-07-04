@@ -20,7 +20,6 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <Button fx:id="openReminderButton" layoutX="470.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleOpenReminderWindow" prefHeight="25.0" prefWidth="114.0" text="Set Reminder" />
       <Label layoutX="37.0" layoutY="149.0" prefHeight="38.0" prefWidth="167.0" text="Nebenwirkungen: ">
          <font>
             <Font size="19.0" />

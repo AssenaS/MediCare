@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AddMedicationController {
-    MedicationModel medicationModel;
+    MedicationModel medicationModel = new MedicationModel();
+    MedicationListController medicationListController;
 
     @FXML
     private Button speicherButton;
@@ -25,9 +26,6 @@ public class AddMedicationController {
 
     @FXML
     private TextField nebenwirkungenTextFeld;
-
-
-    ArrayList<Medication> allMedications = new ArrayList<>();
 
     public void initialize() {
         medicationModel = new MedicationModel();
@@ -58,8 +56,19 @@ public class AddMedicationController {
         try {
             int index = Integer.parseInt(indexString);
 
-            MedicationModel.addMedication(medikamentName, index, nebenwirkungen);
+            if(medicationModel.getMedication().stream().anyMatch(medication -> medication.getMedicationName().equals(medikamentName) && medication.getIndex() == index)) {
+                Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                alert2.setTitle("Fehler");
+                alert2.setHeaderText(null);
+                alert2.setContentText("Medikament existiert bereits.");
+                alert2.showAndWait();
+                return;
+            }
+
+            Medication newMedication = new Medication(medikamentName,index,nebenwirkungen);
+            MedicationModel.addMedication(newMedication);
             medicationModel.medicationSerialize();
+            medicationListController.refreshMedicationList();
 
             medikamentTextFeld.clear();
             indexTextFeld.clear();
@@ -76,5 +85,10 @@ public class AddMedicationController {
             alert.showAndWait();
         }
     }
+
+    public void setMedicationListController(MedicationListController controller) {
+        this.medicationListController = controller;
+    }
+
 }
 

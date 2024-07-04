@@ -30,13 +30,6 @@ public class Patient implements Serializable {
         return index;
     }
 
-    public void setIndex(ArrayList<Integer> index) {
-        this.index = index;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
 
     public LocalDate getBirthday() {
         return birthday;
@@ -48,32 +41,6 @@ public class Patient implements Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public void addReminder(String message, LocalDateTime time) {
-        Reminder reminder = new Reminder(message, time);
-        reminders.add(reminder);
-        scheduleReminder(reminder);
-    }
-
-    private void scheduleReminder(Reminder reminder) {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                showReminder(reminder);
-            }
-        }, Date.from(reminder.getReminderTime().atZone(ZoneId.systemDefault()).toInstant()));
-    }
-
-    private void showReminder(Reminder reminder) {
-        Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Reminder");
-            alert.setHeaderText("Reminder for " + name);
-            alert.setContentText(reminder.getMessage());
-            alert.showAndWait();
-        });
     }
 
     @Override

@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -104,7 +105,7 @@ public class MainWindowController {
         for (int i = 0; i < 24; i++) {
             hourComboBox.getItems().add(i);
         }
-        for (int i = 0; i < 60; i += 5) {
+        for (int i = 0; i < 60; i += 1) {
             minuteComboBox.getItems().add(i);
         }
     }
@@ -125,14 +126,25 @@ public class MainWindowController {
         }
         if (name != null && !name.isEmpty() && birthday != null && indexString != null) {
             ArrayList<Integer> medikamenteIndex = new ArrayList<>();
-            for (String indexStr : indexString.split(",")) {
+            String[] indexStrArray = indexString.split(",");
+            for (int i = 0; i < indexStrArray.length; i++) {
                 try {
-                    int index = Integer.parseInt(indexStr.trim());
+                    int index = Integer.parseInt(indexStrArray[i].trim());
                     medikamenteIndex.add(index);
                 } catch (NumberFormatException e) {
                     System.out.println("Fehler beim Hinzufügen des Patienten");
                 }
             }
+
+            if(patientModel.getPatients().stream().anyMatch(patient -> patient.getName().equals(name) && patient.getBirthday().equals(birthday))) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fehler");
+                alert.setHeaderText(null);
+                alert.setContentText("Patient existiert bereits.");
+                alert.showAndWait();
+                return;
+            }
+
             patientModel.addPatient(name, birthday, medikamenteIndex);
             patientModel.patientSerialize();
             PatientenNameTextFeld.clear();
@@ -143,17 +155,45 @@ public class MainWindowController {
     }
 
     @FXML
-    private void handleSetReminder() {
+    private void handleSetReminder(ActionEvent event) {
         LocalDate date = datePicker.getValue();
         Integer hour = hourComboBox.getValue();
         Integer minute = minuteComboBox.getValue();
-        if (date != null && hour != null && minute != null) {
-            LocalDateTime reminderTime = LocalDateTime.of(date, LocalTime.of(hour, minute));
-            Reminder reminder = new Reminder("Zeit für Ihre Medikamente", reminderTime);
-            reminderManager.addReminder(reminder);
-            reminderLabel.setText("Erinnerung gesetzt für: " + reminderTime);
+
+        if (date == null || hour == null || minute == null) {
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Fehler");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Bitte wählen Sie einen Patienten, Datum, Stunde und Minute.");
+            errorAlert.showAndWait();
+            return;
+        }
+
+        LocalDateTime reminderTime = LocalDateTime.of(date, LocalTime.of(hour, minute));
+        Patient selectedPatient = tabelle.getSelectionModel().getSelectedItem();
+
+
+        if (selectedPatient != null) {
+            String message = "Erinnerung für " + selectedPatient.getName() + ": Medikamente einnehmen";
+
+            reminderManager.addReminder(new Reminder(message, reminderTime));
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Erinnerung");
+            alert.setHeaderText(null);
+            alert.setContentText("Erinnerung gesetzt für: " + selectedPatient + ", um: " + reminderTime);
+            alert.showAndWait();
+
+            datePicker.setValue(null);
+            hourComboBox.setValue(null);
+            minuteComboBox.setValue(null);
+
         } else {
-            reminderLabel.setText("Bitte wählen Sie Datum, Stunde und Minute.");
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Fehler");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Bitte wählen Sie einen Patienten, Datum, Stunde und Minute.");
+            errorAlert.showAndWait();
         }
     }
 
@@ -200,11 +240,17 @@ public class MainWindowController {
         this.scene = scene;
     }
 
-    public void handleMedikamenteBearbeiten(MouseEvent mouseEvent) {
+
+    public void handleMedikamenteReminder(MouseEvent mouseEvent) {
         Patient selectedPatient = (Patient) tabelle.getSelectionModel().getSelectedItem();
+    }
 
-        if(selectedPatient != null) {
 
-        }
+    public void handlePatientRemove(ActionEvent actionEvent) {
+        Patient selectedPatient = (Patient) tabelle.getSelectionModel().getSelectedItem();
+        arrayPatientList.remove(selectedPatient);
+        PatientModel.getPatients().remove(selectedPatient);
+        patientModel.patientSerialize();
+        updateTableViewPatient();
     }
 }
