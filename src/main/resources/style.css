@@ -1,0 +1,55 @@
+/* General Window Styling */
+.root {
+    -fx-background-color: #84BCDC; /* Light Blue */
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Button Styling */
+.button {
+    -fx-background-color: #38596C; /* Darker Blue */
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+}
+
+.button:hover { /* Hover effect */
+    -fx-background-color: #1565c0; /* Even darker blue on hover */
+    -fx-cursor: hand;
+}
+
+/* TableView Styling */
+.table-view {
+    -fx-background-color: white;
+    -fx-table-cell-border-color: transparent; /* Remove cell borders */
+}
+
+.table-view .column-header-background { /* Column header background */
+    -fx-background-color: black; /* Darker blue */
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #1565c0;
+    -fx-alignment: center;
+}
+
+/* Alternating Row Colors (Optional) */
+.table-view .table-row-cell:odd {
+    -fx-background-color: whitesmoke;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: lightblue; /* Change the background color of selected cells */
+    -fx-text-fill: black;             /* Ensure text is visible (optional) */
+}
+
+.table-view .table-row-cell:odd:selected {
+    -fx-background-color: lightblue; /* Change the background color of odd selected cells */
+    -fx-text-fill: black;             /* Ensure text is visible (optional) */
+}
+
+.table-row-cell:even {
+    -fx-background-color: white;    /* Set background color for even rows */
+}
+
+.table-row-cell:odd {
+    -fx-background-color: lightgray; /* Set background color for odd rows */
+}

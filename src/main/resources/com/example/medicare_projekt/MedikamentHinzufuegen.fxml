@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="553.0" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medicare_projekt.AddMedicationController">
+   <children>
+      <TextField fx:id="medikamentTextFeld" layoutX="236.0" layoutY="34.0" />
+      <Label layoutX="37.0" layoutY="34.0" prefHeight="25.0" prefWidth="199.0" text="Medikamentenname:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="indexTextFeld" layoutX="236.0" layoutY="91.0" prefHeight="25.0" prefWidth="73.0" />
+      <Label layoutX="37.0" layoutY="91.0" prefHeight="25.0" prefWidth="65.0" text="Index: ">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="37.0" layoutY="149.0" prefHeight="38.0" prefWidth="167.0" text="Nebenwirkungen: ">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nebenwirkungenTextFeld" alignment="TOP_LEFT" layoutX="230.0" layoutY="156.0" prefHeight="79.0" prefWidth="292.0" />
+      <Button fx:id="speicherButton" layoutX="442.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleSpeicherButton" text="Speichern" />
+   </children>
+</AnchorPane>

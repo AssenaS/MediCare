@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="HauptFenster" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="600.0" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medicare_projekt.MainWindowController">
+    <children>
+        <Label fx:id="welcomeText" layoutX="23.0" layoutY="23.0" prefHeight="17.0" prefWidth="447.0" text="Hallo! Bitte wählen Sie Ihre/n Patient/in:">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tabelle" layoutX="11.0" layoutY="56.0" onMouseClicked="#handleMedikamenteReminder" prefHeight="286.0" prefWidth="579.0">
+            <columns>
+                <TableColumn fx:id="tabelleName" prefWidth="218.0" text="Name" />
+                <TableColumn fx:id="tabelleGeburtsdatum" minWidth="0.0" prefWidth="277.0" text="Geburtstag" />
+                <TableColumn fx:id="tabelleIndex" maxWidth="178.0" prefWidth="83.0" text="Index" />
+            </columns>
+        </TableView>
+        <Button fx:id="addButton" layoutX="469.0" layoutY="351.0" mnemonicParsing="false" onAction="#handlePatientHinzufuegenButton" prefHeight="17.0" prefWidth="114.0" text="Hinzufügen" />
+        <TextField fx:id="PatientenNameTextFeld" layoutX="14.0" layoutY="351.0" promptText="Nachname, Vorname" />
+        <DatePicker fx:id="GeburtsdatumFeld" layoutX="193.0" layoutY="351.0" promptText="Geburtsdatum" />
+        <Button fx:id="viewMedicationListButton" layoutX="14.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleMedikamentenListeAnsehen" prefHeight="4.0" prefWidth="214.0" text="Medikamentenliste ansehen" />
+        <TextField fx:id="indexLabel" alignment="CENTER" layoutX="399.0" layoutY="351.0" prefHeight="25.0" prefWidth="60.0" promptText="Index" />
+
+
+        <VBox alignment="CENTER" layoutX="14.0" layoutY="420.0" spacing="10" />
+        <DatePicker fx:id="datePicker" layoutX="332.0" layoutY="387.0" promptText="Datum" />
+        <HBox layoutX="332.0" layoutY="428.0" spacing="10">
+            <ComboBox fx:id="hourComboBox" />
+            <ComboBox fx:id="minuteComboBox" />
+        </HBox>
+        <Button fx:id="reminderButton" layoutX="475.0" layoutY="428.0" onAction="#handleSetReminder" text="Alarm stellen " />
+        <Button fx:id="removePatient" layoutX="14.0" layoutY="441.0" mnemonicParsing="false" onAction="#handlePatientRemove" text="Patient löschen" />
+    </children>
+</AnchorPane>

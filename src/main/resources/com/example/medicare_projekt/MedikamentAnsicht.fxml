@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="456.0" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medicare_projekt.MedicationListController">
+    <children>
+        <TableView fx:id="tabelleMedikamente" layoutX="6.0" layoutY="14.0" prefHeight="396.0" prefWidth="444.0">
+            <columns>
+                <TableColumn fx:id="tabelleMedikamentenIndex" prefWidth="59.0" text="Index" />
+                <TableColumn fx:id="tabelleMedikament" maxWidth="335.0" prefWidth="101.0" text="Medikament" />
+                <TableColumn fx:id="tabelleNebenwirkungen" maxWidth="292.0" prefWidth="292.0" text="Nebenwirkungen" />
+            </columns>
+        </TableView>
+        <Button fx:id="bmedikamentHinzufuegen" layoutX="14.0" layoutY="419.0" mnemonicParsing="false" onAction="#handleMedikamentHinzufuegenButton" prefHeight="25.0" prefWidth="179.0" text="Medikament hinzufügen" />
+        <Button fx:id="medicationDelete" layoutX="211.0" layoutY="419.0" mnemonicParsing="false" onAction="#handleMedicationDelete" text="Medikament löschen" />
+    </children>
+</AnchorPane>
