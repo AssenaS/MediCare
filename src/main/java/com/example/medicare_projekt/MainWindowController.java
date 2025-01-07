@@ -17,7 +17,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
+/**
+ * Hauptcontroller für die Anwendung.
+ * Dieser Controller verwaltet die Hauptansicht, einschließlich der Anzeige von Patienten in
+ * einer Tabelle, dem Hinzufügen neuer Patienten, dem Setzen von Erinnerungen für Patienten,
+ * dem Anzeigen der Medikamentenliste und dem Entfernen von Patienten.
+ */
 public class MainWindowController {
     private Stage stage;
     private Scene hauptScene;
@@ -86,6 +91,14 @@ public class MainWindowController {
 
     private ReminderManager reminderManager = new ReminderManager();
 
+
+    /**
+     * Initialisiert den Controller.
+     *
+     * Lädt die Patientendaten aus der Datei, initialisiert das Modell, ruft die
+     * Patientenliste ab, befüllt die Tabellenansicht und initialisiert die ComboBoxen
+     * für die Erinnerungsfunktion.
+     */
     public void initialize() {
         patientModel = new PatientModel();
         patientModel.loadDataFromFile();
@@ -109,7 +122,15 @@ public class MainWindowController {
             minuteComboBox.getItems().add(i);
         }
     }
-
+    /**
+     * Behandelt das Klicken des "Patient hinzufügen"-Buttons.
+     *
+     * Liest die Eingaben aus den Textfeldern, validiert sie, erstellt einen neuen
+     * Patienten und fügt ihn zur Liste hinzu. Speichert die Patientenliste und aktualisiert
+     * die Tabellenansicht.
+     *
+     * @param event Das auslösende ActionEvent.
+     */
     @FXML
     private void handlePatientHinzufuegenButton(ActionEvent event) {
         String name = PatientenNameTextFeld.getText();
@@ -153,7 +174,14 @@ public class MainWindowController {
             updateTableViewPatient();
         }
     }
-
+    /**
+     * Setzt eine Erinnerung für den ausgewählten Patienten.
+     *
+     * Liest das Datum und die Uhrzeit aus den entsprechenden Bedienelementen, erstellt eine Erinnerung
+     * und fügt sie dem Erinnerungsmanager hinzu. Zeigt eine Bestätigung oder Fehlermeldung an.
+     *
+     * @param event Das auslösende ActionEvent.
+     */
     @FXML
     private void handleSetReminder(ActionEvent event) {
         LocalDate date = datePicker.getValue();
@@ -196,7 +224,12 @@ public class MainWindowController {
             errorAlert.showAndWait();
         }
     }
-
+    /**
+     * Aktualisiert die Tabellenansicht der Patienten.
+     *
+     * Leert die Tabelle, fügt die aktuellen Patientendaten hinzu und gibt eine Meldung aus,
+     * falls nicht alle Felder ausgefüllt sind.
+     */
     @FXML
     private void updateTableViewPatient() {
         if (tabelleName != null && tabelleGeburtsdatum != null && tabelleIndex != null) {
@@ -207,7 +240,12 @@ public class MainWindowController {
             System.out.println("Alle Felder müssen ausgefüllt sein");
         }
     }
-
+    /**
+     * Öffnet die Medikamentenliste in einem neuen Fenster.
+     *
+     * @param actionEvent Das auslösende ActionEvent.
+     * @throws IOException Wenn ein Fehler beim Laden der FXML-Datei auftritt.
+     */
     public void handleMedikamentenListeAnsehen(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MedikamentAnsicht.fxml"));
         Parent medikamentenAnsicht = loader.load();
@@ -245,7 +283,11 @@ public class MainWindowController {
         Patient selectedPatient = (Patient) tabelle.getSelectionModel().getSelectedItem();
     }
 
-
+    /**
+     * Entfernt den ausgewählten Patienten aus der Liste und speichert die Änderungen.
+     *
+     * @param actionEvent Das auslösende ActionEvent.
+     */
     public void handlePatientRemove(ActionEvent actionEvent) {
         Patient selectedPatient = (Patient) tabelle.getSelectionModel().getSelectedItem();
         arrayPatientList.remove(selectedPatient);

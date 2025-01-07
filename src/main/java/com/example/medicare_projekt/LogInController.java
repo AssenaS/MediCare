@@ -14,9 +14,13 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+/**
+ * Der Controller für den Login-View.
+ * Er ist verantwortlich für die Verarbeitung der Benutzereingaben und die Navigation zum Hauptfenster.
+ */
 public class LogInController {
-    LogInModel logInModel;
+
+    // ... FXML Elemente
 
     @FXML
     private TextField benutzerNameTextField;
@@ -37,7 +41,11 @@ public class LogInController {
     private String passwort = "1234";
 
     private String benutzername = "demo";
-
+    /**
+     * Setzt die Stage für den Controller.
+     *
+     * @param stage Die Stage, die dem Controller zugeordnet werden soll.
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -46,8 +54,16 @@ public class LogInController {
         this.scene = scene;
     }
 
-
+    /**
+     * Behandelt das Klicken auf den "Sign in"-Button.
+     * Überprüft die eingegebenen Anmeldeinformationen und öffnet das Hauptfenster bei Erfolg.
+     *
+     * @param event Das ActionEvent, das ausgelöst wurde.
+     * @throws IOException Wenn ein Fehler beim Laden der FXML-Datei für das Hauptfenster auftritt.
+     */
     public void handleSigninButton(ActionEvent event) throws IOException {
+        // ... (Logik zur Überprüfung von Benutzername und Passwort, dann Öffnen des Hauptfensters)
+
         String passwortEingegeben = passwortTextField.getText();
         String benutzernameEingegeben = benutzerNameTextField.getText();
 
