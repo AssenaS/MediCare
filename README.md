@@ -1,17 +1,29 @@
-# MediCare 
+# MediCare Projekt
 
-Dieses Repository enthält das MediCare-Projekt mit Quellcode, Präsentationsmaterialien und weiteren Ressourcen.
+This repository contains the MediCare project, including important resources such as the project documentation, presentation, and the Zulu file.
 
-## Inhalt
-- [Projektbeschreibung](#projektbeschreibung)
+## Contents
+
+- [Projekt Dokumentation](#projekt-dokumentation)
 - [Präsentation](#präsentation)
-- [Bericht](#bericht)
+- [Zulu File](#zulu-file)
 
-## Projektbeschreibung
-MediCare ist eine Java-Anwendung, die [kurze Beschreibung, was das Projekt macht].
+## Projekt Dokumentation
+The project documentation in PDF format provides an overview and details about the MediCare project.
 
 ## Präsentation
-Die Projektpräsentation finden Sie [hier](presentation/mediCare_presentation.pdf).
+The presentation in PDF format describes the project objectives and approach.
 
-## Bericht
-Der Projektbericht (Bericht) ist [hier](bericht/mediCare_report.pdf) zu finden.
+## Zulu File
+The Zulu file is the compiled Java project, ready to be executed.
+
+---
+
+### **Step 4: Commit Your Changes**
+
+Now that we've added the files and created the `README.md` file, let's commit everything:
+
+1. **Commit the changes**:
+
+   ```bash
+   git commit -m "Initial commit with project files and README"
